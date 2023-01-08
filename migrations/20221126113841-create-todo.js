@@ -1,20 +1,34 @@
-{
-  "development": {
-    "username": "postgres",
-    "password": "vishnukolluri",
-    "database": "wd-todo-dev",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+"use strict";
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("Todos", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      title: {
+        type: Sequelize.STRING,
+      },
+      dueDate: {
+        type: Sequelize.DATEONLY,
+      },
+      completed: {
+        type: Sequelize.BOOLEAN,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
   },
-  "test": {
-    "username": "postgres",
-    "password": "vishnukolluri",
-    "database": "wd-todo-test",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("Todos");
   },
-  "production": {
-    "use_env_variable": "DATABASE_URL",
-    "dialect":"postgres"
-  }
-}
+};
